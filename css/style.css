@@ -1,0 +1,35 @@
+.brandName {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 900;
+  color: #9141FF;
+  border-bottom: 8px solid #eee;
+}
+form#todoInputArea {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 16px;
+}
+.inputSubject {
+  width: 100%;
+}
+.inputDate {
+  flex-grow: 1;
+}
+.textareaContent {
+  width: 100%;
+}
+h2.title {
+  font-size: 20px;
+  font-weight: 500;
+}
+.todoIng {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  padding: 0 16px;
+}
+.sortArea {
+  display: flex;
+  align-content: center;
+}
