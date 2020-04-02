@@ -2,6 +2,7 @@ html {
   font-size: 10px;
   font-family: 'Noto Sans KR', sans-serif;
   line-height: 1.5;
+  color: #707070;
 }
 * {box-sizing: border-box;}
 
@@ -10,11 +11,15 @@ html {
   box-shadow: 0 0 3px rgba(145, 65, 255, .5);
 }
 
-body {font-size: 1.6rem;}
+body {font-size: 1.4rem;}
 
 h1, h2, h3, h4, h5, h6, p, ul, ol, button  {
   padding: 0;
   margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #222;
 }
 
 ul, ol {
@@ -23,9 +28,10 @@ ul, ol {
 
 input[type="text"], input[type="date"], textarea {
   border: 1px solid #cecece;
+  color: #707070;
 }
 input[type="text"], textarea {
-  padding: 11px 10px 9px;
+  padding: 12px 10px 10px;
 }
 input[type="date"] {
   padding: 7px 10px;
@@ -68,9 +74,20 @@ button {
   background: #9141FF;
 }
 
+.btnSort {
+  padding: 6px 4px;
+  margin: 4px;
+  font-size: 1.2rem;
+  color: #b0b0b0;
+}
+.btnSort.active{
+  color: #222;
+}
+
 .btnImportance {
   width: 40px;
   height: 40px;
+  margin-left: 8px;
   background: url(../images/iconStarLineWhite.png) no-repeat 10px 10px;
   background-size: 20px 19px;
   background-color: #cecece;
@@ -98,7 +115,7 @@ button.btnDelete {
   background-position: 4px 4px;
   background-image: url(../images/iconDelete.png);
 }
-li.complete button.btnEdit, li.complete button.btnDelete {
+.complete button.btnEdit, .complete button.btnDelete {
   background-color: #cecece;
 }
 
@@ -107,6 +124,7 @@ li.complete button.btnEdit, li.complete button.btnDelete {
   width: 24px;
   height: 24px;
   padding-top: 24px;
+  margin-right: 8px;
   overflow: hidden;
   background-image: url(../images/iconStarLineColor.png);
   background-size: 20px 19px;
@@ -116,9 +134,9 @@ li.complete button.btnEdit, li.complete button.btnDelete {
 .iconImportance.check {
   background-image: url(../images/iconStarFullColor.png);
 }
-li.complete .iconImportance {
+.complete .iconImportance {
   background-image: url(../images/iconStarLineGray.png);
 }
-li.complete .iconImportance.check {
+.complete .iconImportance.check {
   background-image: url(../images/iconStarFullGray.png);
 }
