@@ -5,7 +5,7 @@
   color: #9141FF;
   border-bottom: 8px solid #eee;
 }
-form#todoInputArea {
+#todoInputArea {
   display: flex;
   flex-wrap: wrap;
   padding: 0 16px;

@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hyacinta/StoodyPlannner.git"
+    "url": "git+https://github.com/JimmyJoo/StoodyPlannner.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hyacinta/StoodyPlannner/issues"
+    "url": "https://github.com/JimmyJoo/StoodyPlannner/issues"
   },
-  "homepage": "https://github.com/hyacinta/StoodyPlannner#readme",
+  "homepage": "https://github.com/JimmyJoo/StoodyPlannner#readme",
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
