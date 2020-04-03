@@ -1,83 +1,105 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/common.css">
-  <script src="js/app.js" defer></script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU="
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/common.css" />
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <div id="container">
+      <h1 class="brandName">STOODY Planner</h1>
 
-
-<div id="container">
-  <h1 class="brandName">STOODY Planner</h1> 
-  
-  <!-- TodoList 작성폼 -->
-  <div id="todoInputArea">
-    <input type="text" class="inputSubject">
-    <input type="date" class="inputDate">
-    <button class="btnImportance" title="중요도 체크"></button>
-    <textarea name="" id="" rows="3" class="textareaContent"></textarea>
-    <button class="btnFull btnConfirm">확인</button>
-  </div>
-  <!-- Active List -->
-  <div class="viewBox">
-    <h2 class="title">진행중</h2>
-    <ul class="sortArea">
-      <li><button class="btnSort active">중요도</button></li>
-      <li><button class="btnSort">최신순</button></li>
-      <li><button class="btnSort">남은기간</button></li>
-    </ul>
-    <ul class="todoList">
-      <li>
-        <span class="iconImportance check">중요도 :  보통</span>
-        <input type="checkbox" id="test1" class="inputCheckbox"><label class="iconCheckbox" for="test1"></label>
-        <span class="subjectView">제목입니다.</span>
-        <button class="btnEdit">수정</button>
-        <button class="btnDelete">삭제</button>
-        <div class="contentView">
-          내용입니다. 내용입니다.
-          <div class="targetDate">완료 예정일 : D-2 (2020.04.02)</div>
-        </div>
-      </li>
-      <li>
-        <span class="iconImportance">중요도 :  보통</span>
-        <input type="checkbox" id="test2" class="inputCheckbox"><label class="iconCheckbox" for="test2"></label>
-        <span class="subjectView">제목입니다.</span>
-        <button class="btnEdit">수정</button>
-        <button class="btnDelete">삭제</button>
-      </li>
-    </ul>
-  </div>
-  <!-- Completed List-->
-  <div class="viewBox">
-    <h2 class="title">완료</h2>
-    <ul class="sortArea">
-      <li><button class="btnSort active">중요도</button></li>
-      <li><button class="btnSort">최신순</button></li>
-      <li><button class="btnSort">남은기간</button></li>
-    </ul>
-    <ul class="todoList complete">
-      <li>
-        <span class="iconImportance check">중요도 :  보통</span>
-        <input type="checkbox" id="test3" class="inputCheckbox" checked><label class="iconCheckbox" for="test3"></label>
-        <span class="subjectView">제목입니다.</span>
-        <button class="btnEdit">수정</button>
-        <button class="btnDelete">삭제</button>
-      </li>
-      <li>
-        <span class="iconImportance">중요도 :  보통</span>
-        <input type="checkbox" id="test4" class="inputCheckbox" checked><label class="iconCheckbox" for="test4"></label>
-        <span class="subjectView">제목입니다.</span>
-        <button class="btnEdit">수정</button>
-        <button class="btnDelete">삭제</button>
-      </li>
-    </ul>
-  </div>
-</div>
-</body>
+      <!-- TodoList 작성폼 -->
+      <div id="todoInputArea">
+        <input type="text" class="inputSubject" />
+        <input type="date" class="inputDate" />
+        <button class="btnImportance" title="중요도 체크"></button>
+        <textarea name="" id="" rows="3" class="textareaContent"></textarea>
+        <button class="btnFull btnConfirm">확인</button>
+      </div>
+      <!-- Active List -->
+      <div class="viewBox">
+        <h2 class="title">진행중</h2>
+        <ul class="sortArea">
+          <li><button class="btnSort active">중요도</button></li>
+          <li><button class="btnSort">최신순</button></li>
+          <li><button class="btnSort">남은기간</button></li>
+        </ul>
+        <ul class="todoList">
+          <li>
+            <span class="iconImportance check">중요도 : 보통</span>
+            <input type="checkbox" id="test1" class="inputCheckbox" /><label
+              class="iconCheckbox"
+              for="test1"
+            ></label>
+            <span class="subjectView">제목입니다.</span>
+            <button class="btnEdit">수정</button>
+            <button class="btnDelete">삭제</button>
+            <div class="contentView">
+              내용입니다. 내용입니다.
+              <div class="targetDate">완료 예정일 : D-2 (2020.04.02)</div>
+            </div>
+          </li>
+          <li>
+            <span class="iconImportance">중요도 : 보통</span>
+            <input type="checkbox" id="test2" class="inputCheckbox" /><label
+              class="iconCheckbox"
+              for="test2"
+            ></label>
+            <span class="subjectView">제목입니다.</span>
+            <button class="btnEdit">수정</button>
+            <button class="btnDelete">삭제</button>
+          </li>
+        </ul>
+      </div>
+      <!-- Completed List-->
+      <div class="viewBox">
+        <h2 class="title">완료</h2>
+        <ul class="sortArea">
+          <li><button class="btnSort active">중요도</button></li>
+          <li><button class="btnSort">최신순</button></li>
+          <li><button class="btnSort">남은기간</button></li>
+        </ul>
+        <ul class="todoList complete">
+          <li>
+            <span class="iconImportance check">중요도 : 보통</span>
+            <input
+              type="checkbox"
+              id="test3"
+              class="inputCheckbox"
+              checked
+            /><label class="iconCheckbox" for="test3"></label>
+            <span class="subjectView">제목입니다.</span>
+            <button class="btnEdit">수정</button>
+            <button class="btnDelete">삭제</button>
+          </li>
+          <li>
+            <span class="iconImportance">중요도 : 보통</span>
+            <input
+              type="checkbox"
+              id="test4"
+              class="inputCheckbox"
+              checked
+            /><label class="iconCheckbox" for="test4"></label>
+            <span class="subjectView">제목입니다.</span>
+            <button class="btnEdit">수정</button>
+            <button class="btnDelete">삭제</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
 </html>
