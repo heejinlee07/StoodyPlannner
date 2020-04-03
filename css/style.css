@@ -59,6 +59,7 @@ h2.title {
 .contentView {
   width: 100%;
   padding: 12px 4px 16px;
+  display: none;
 }
 .targetDate {
   margin-top: 4px;
