@@ -90,12 +90,11 @@ const renderHtml = (todos, html) => {
   todos.forEach(todo => {
     html += `
     <li id="${todo.id}">
-      <span class="iconImportance ${
-        todo.imp ? "check" : ""
-      }"> 중요도 :  보통
+      <span class="iconImportance ${todo.imp ? "check" : ""}"> 중요도 :  보통
       </span>
       <input type="checkbox" id="ck-${todo.id}" class="inputCheckbox" ${
-      todo.completed ? "checked" : ""}>
+      todo.completed ? "checked" : ""
+    }>
       <label class="iconCheckbox" for="ck-${todo.id}"></label>
       <span class="subjectView">${todo.subject}</span>
       <button class="btnEdit">수정</button>
@@ -112,10 +111,9 @@ const renderHtml = (todos, html) => {
   return html;
 };
 
-
 const getDday = () => {
   return 10;
-}
+};
 
 const getId = () => {
   if (todos.length === 0) return 1;
@@ -123,7 +121,7 @@ const getId = () => {
 };
 
 $btnImp.onclick = () => {
-  $btnImp.classList.toggle('check');
+  $btnImp.classList.toggle("check");
 };
 
 const editTodo = id => {
@@ -133,20 +131,29 @@ const editTodo = id => {
   // $btnImp.classList.toggle('check', myTodo.imp);
   // $txtContent.value = myTodo.content;
   // removeTodo(id);
-}
+};
 
 // Event Bindings
 window.onload = getTodos;
 
 // button.btnConfirm onclick event
 $btnConfirm.onclick = () => {
+  todos = [
+    {
+      id: getId(),
+      subject: `${$inputSubject.value}`,
+      dDay: `${$inputDate.value}`,
+      content: `${$txtContent.value}`,
+      imp: $btnImp.classList.contains("check") ? true : false,
+      completed: false
+    },
+    ...todos
+  ];
 
-  todos = [{ id: getId(), subject: `${$inputSubject.value}`, dDay: `${$inputDate.value}`, content: `${$txtContent.value}`, imp: $btnImp.classList.contains('check') ? true : false, completed: false }, ...todos];
-
-  $inputSubject.value = '';
-  $inputDate.value = '';
-  $btnImp.classList.remove('check');
-  $txtContent.value = '';
+  $inputSubject.value = "";
+  $inputDate.value = "";
+  $btnImp.classList.remove("check");
+  $txtContent.value = "";
 
   render();
 };
@@ -155,12 +162,18 @@ function removeTodo(id) {
   todos = todos.filter(todo => todo.id !== +id);
 }
 
+function moveTodo(id) {
+  todos = todos.map(todo =>
+    todo.id === +id ? { ...todo, completed: !todo.completed } : todo
+  );
+}
+
 $incompleteList.onclick = e => {
-  if (e.target.matches('.incomplete > li > .btnDelete')) {
+  if (e.target.matches(".incomplete > li > .btnDelete")) {
     removeTodo(e.target.parentNode.id);
     render();
   }
-  if (e.target.matches('.incomplete > li > .btnEdit')) {
+  if (e.target.matches(".incomplete > li > .btnEdit")) {
     editTodo(e.target.parentNode.id);
     render();
   }
@@ -172,16 +185,24 @@ $completeList.onclick = e => {
     removeTodo(e.target.parentNode.id);
     render();
   }
-  if (e.target.matches('.complete > li > .btnEdit')) {
+  if (e.target.matches(".complete > li > .btnEdit")) {
     editTodo(e.target.parentNode.id);
     render();
   }
   return;
 };
 
+$incompleteList.onchange = e => {
+  if (!e.target.matches(".incomplete > li > .inputCheckbox")) return;
+  moveTodo(e.target.parentNode.id);
+  render();
+};
 
-
-
+$completeList.onchange = e => {
+  if (!e.target.matches(".complete > li > .inputCheckbox")) return;
+  moveTodo(e.target.parentNode.id);
+  render();
+};
 
 // const $btnConfirm = document.querySelector('.btnConfirm');
 // const $inputDate = document.querySelector('.inputDate');
@@ -194,8 +215,6 @@ $completeList.onclick = e => {
 // day = day < 10 ? '0' + day : day;
 // today = year + '-' + month + '-' + day;
 // $inputDate.setAttribute('min', today);
-
-
 
 // const getDday = (dDay) => {
 //   // let [myYear, myMonth, myDay] = $inputDate.value.split('-');
@@ -214,8 +233,7 @@ $completeList.onclick = e => {
 //   // $inputDate.setAttribute('min', today);
 //   console.log('dday: ', dDay);
 //   console.log('today: ', today);
-  
-  
+
 //   const gap = dDay.getTime() - today.getTime();
 //   let result = Math.ceil(gap / (1000 * 60 * 60 * 24));
 //   result = result <= 0 ? result * -1 : result;
