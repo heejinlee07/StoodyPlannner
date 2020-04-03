@@ -1,29 +1,47 @@
+let todos = [];
 
-const hello = 'hello';
+const $todoList = document.querySelector('.todoList');
 
-// const $btnConfirm = document.querySelector('.btnConfirm');
+const render = () => {
+  let html = '';
+  todos.forEach(todo => {
+    html += `<li id="${todo.id}">
+  <span class="iconImportance ${todo.imp ? 'check' : ''}">중요도 : ${todo.imp ? '중요함' : '보통'}</span>
+  <input type="checkbox" id="check${todo.id}" class="inputCheckbox"><label class="iconCheckbox" for="check${todo.id}"></label>
+  <span class="subjectView">${todo.subject}</span>
+  <button class="btnEdit">수정</button>
+  <button class="btnDelete">삭제</button>
+  <div class="contentView">
+    ${todo.content}
+    <div class="targetDate">완료 예정일 : D-2 (${todo.dDay})</div>
+  </div>
+</li>`;
+  });
 
-// const getDday = () => {
-//   const $inputDate = document.querySelector('.inputDate');
+  $todoList.innerHTML = html;
+};
+const getTodos = () => {
+  todos = [
+    {
+      id: 1, subject: 'test 제목입니다.', dDay: '2020-04-03', imp: false, content: '임시 데이터입니다', completed: true
+    },
+    {
+      id: 2, subject: '해커톤 준비', dDay: '2020-04-03', imp: true, content: '해커톤 임시 데이터입니다', completed: false
+    },
+    {
+      id: 3, subject: '투두리스트만들기', dDay: '2020-04-03', imp: false, content: '투두리스트 만들기 임시 데이터입니다', completed: false
+    },
+    {
+      id: 4, subject: '삭제해볼것', dDay: '2020-04-03', imp: true, content: '삭제해볼것 임시 데이터입니다', completed: false
+    },
+    {
+      id: 5, subject: '리스트를 만들어서 넣어봅시다.', dDay: '2020-04-03', imp: true, content: '리스트!!!! 임시 데이터입니다', completed: true
+    }
+  ];
+  // sort
+  todos.sort((a, b) => b.id - a.id);
 
-//   let today = new Date();
-//   const year = today.getFullYear();
-//   let month = today.getMonth() + 1;
-//   let day = today.getDate();
-//   month = month < 10 ? '0' + month : month;
-//   day = day < 10 ? '0' + day : day;
-//   today = year + '-' + month + '-' + day;
-//   $inputDate.setAttribute('min', today);
+  render();
+};
 
-
-//   let [myYear, myMonth, myDay] = $inputDate.value.split('-');
-//   const toDay = new Date();
-//   myYear = +myYear;
-//   myMonth = +myMonth - 1;
-//   myDay = +myDay;
-//   const dDay = new Date(myYear, myMonth, myDay);
-//   const gap = dDay.getTime() - toDay.getTime();
-//   let result = Math.ceil(gap / (1000 * 60 * 60 * 24));
-//   result = result <= 0 ? result * -1 : result;
-//   console.log('D-' + result);
-// }
+window.onload = getTodos;
