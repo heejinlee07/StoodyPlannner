@@ -133,12 +133,12 @@ $btnImp.onclick = () => {
 };
 
 const editTodo = id => {
-  const myTodo = todos.find(todo => todo.id === +id);
-  $inputSubject.value = myTodo.subject;
-  $inputDate.value = myTodo.dDay;
-  $btnImp.classList.toggle('check', myTodo.imp);
-  $txtContent.value = myTodo.content;
-  removeTodo(id);
+  // const myTodo = todos.find(todo => todo.id === +id);
+  // $inputSubject.value = myTodo.subject;
+  // $inputDate.value = myTodo.dDay;
+  // $btnImp.classList.toggle('check', myTodo.imp);
+  // $txtContent.value = myTodo.content;
+  // removeTodo(id);
 }
 
 // Event Bindings
