@@ -11,6 +11,7 @@ const $btnImp = document.querySelector('.btnImportance');
 const $txtContent = document.querySelector('.textareaContent');
 const $btnConfirm = document.querySelector('.btnConfirm');
 
+
 // 초기 데이터(딱 한번만 실행)
 // localStorage.setItem(
 //   "User",
@@ -106,6 +107,13 @@ const renderHtml = (todos, html) => {
         완료 예정일 : D-${getDday(todo.dDay)} (${todo.dDay})
         </div>
       </div>
+      <div id="editArea">
+        <input type="text" class="inputSubject">
+        <input type="date" class="inputDate">
+        <button class="btnImportance" title="중요도 체크"></button>
+        <textarea name="" id="" rows="3" class="textareaContent"></textarea>
+        <button class="btnFull btnEditConfirm">수정</button>
+      </div>
     </li>
     `;
   });
@@ -122,9 +130,7 @@ const getId = () => {
   return Math.max(...todos.map(({ id }) => id)) + 1;
 };
 
-$btnImp.onclick = () => {
-  $btnImp.classList.toggle('check');
-};
+
 
 const editTodo = id => {
   // const myTodo = todos.find(todo => todo.id === +id);
@@ -135,19 +141,18 @@ const editTodo = id => {
   // removeTodo(id);
 }
 
+
+
 // Event Bindings
 window.onload = getTodos;
 
 // button.btnConfirm onclick event
 $btnConfirm.onclick = () => {
-
   todos = [{ id: getId(), subject: `${$inputSubject.value}`, dDay: `${$inputDate.value}`, content: `${$txtContent.value}`, imp: $btnImp.classList.contains('check') ? true : false, completed: false }, ...todos];
-
   $inputSubject.value = '';
   $inputDate.value = '';
   $btnImp.classList.remove('check');
   $txtContent.value = '';
-
   render();
 };
 
@@ -164,6 +169,12 @@ $incompleteList.onclick = e => {
     editTodo(e.target.parentNode.id);
     render();
   }
+  if (e.target.matches('.incomplete > li > .subjectView')) {
+    const contentView = document.querySelectorAll('.contentView');
+    [...contentView].forEach($item => {
+      $item.classList.toggle('active', e.target.parentNode === $item.parentNode);
+    });
+  }
   return;
 };
 
@@ -176,11 +187,19 @@ $completeList.onclick = e => {
     editTodo(e.target.parentNode.id);
     render();
   }
+  if (e.target.matches('.complete > li > .subjectView')) {
+    const contentView = document.querySelectorAll('.contentView');
+    [...contentView].forEach($item => {
+      $item.classList.toggle('active', e.target.parentNode === $item.parentNode);
+    });
+  }
   return;
 };
 
 
-
+$btnImp.onclick = () => {
+  $btnImp.classList.toggle('check');
+};
 
 
 // const $btnConfirm = document.querySelector('.btnConfirm');
