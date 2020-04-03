@@ -116,6 +116,17 @@ const getDday = () => {
   return 10;
 };
 
+}
+
+const editTodo = id => {
+  const myTodo = todos.find(todo => todo.id === +id);
+  $inputSubject.value = myTodo.subject;
+  $inputDate.value = myTodo.dDay;
+  $btnImp.classList.toggle('check', myTodo.imp);
+  $txtContent.value = myTodo.content;
+}
+
+
 // Event Bindings
 window.onload = getTodos;
 
@@ -124,13 +135,26 @@ function removeTodo(id) {
 }
 
 $incompleteList.onclick = e => {
-  if (!e.target.matches(".incomplete > li > .btnDelete")) return;
-  removeTodo(e.target.parentNode.id);
-  render();
+  if (e.target.matches('.incomplete > li > .btnDelete')) {
+    removeTodo(e.target.parentNode.id);
+    render();
+  }
+  if (e.target.matches('.incomplete > li > .btnEdit')) {
+    editTodo(e.target.parentNode.id);
+    render();
+  }
+  return;
 };
 
 $completeList.onclick = e => {
-  if (!e.target.matches(".complete > li > .btnDelete")) return;
-  removeTodo(e.target.parentNode.id);
-  render();
+  if (e.target.matches(".complete > li > .btnDelete")) {
+    removeTodo(e.target.parentNode.id);
+    render();
+  }
+  if (e.target.matches('.complete > li > .btnEdit')) {
+    editTodo(e.target.parentNode.id);
+    render();
+  }
+  return;
 };
+
