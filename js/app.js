@@ -74,11 +74,6 @@ const updateTodos = () => {
 const render = () => {
   updateTodos();
 
-  if (edit) {
-    $inputTodo.id = e.target.id;
-  } else {
-    $inputTodo.id = '';
-  }
   let incompleteHtml = "";
   let completeHtml = "";
   const incompleteTodos = todos.filter(todo => !todo.completed);
