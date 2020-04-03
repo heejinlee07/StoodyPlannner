@@ -25,11 +25,11 @@ const $btnConfirm = document.querySelector('.btnConfirm');
 // Function Declaration
 const getTodos = () => {
   // localStorage에서 todos 가져온다
-  const userData = localStorage.getItem('User');
+  const userData = localStorage.getItem("User");
   todos = JSON.parse(userData);
-  todos.sort((todo1, todo2) => todo2.id - todo1.id);
+  todos = todos ? todos.sort((todo1, todo2) => todo2.id - todo1.id) : [];
   render();
-}
+};
 
 const updateTodos = () => {
   localStorage.setItem('User', JSON.stringify(todos));
@@ -45,16 +45,16 @@ const render = () => {
 
   incompleteHtml = renderHtml(incompleteTodos, incompleteHtml);
   completeHtml = renderHtml(completeTodos, completeHtml);
- 
+
   $incompleteList.innerHTML = incompleteHtml;
   $completeList.innerHTML = completeHtml;
-}
+};
 
 const renderHtml = (todos, html) => {
   todos.forEach(todo => {
     html += `
     <li id="${todo.id}">
-      <span class="iconImportance ${todo.imp ? 'check' : ''} ">중요도 :  보통</span>
+      <span class="iconImportance ${todo.imp ? 'check' : ''} ">중요도 :  ${todo.imp ? '중요함' : '보통'}</span>
       <input type="checkbox" id="ck-${todo.id}" class="inputCheckbox" ${todo.completed ? 'checked' : ''}>
       <label class="iconCheckbox" for="ck-${todo.id}"></label>
       <span class="subjectView">${todo.subject}</span>
@@ -68,19 +68,38 @@ const renderHtml = (todos, html) => {
       </div>
     </li>
     `;
-  })
+  });
   return html;
-}
+};
 
 
 const getDday = () => {
   return 10;
-}
+};
+
+const getId = () => {
+  if (todos.length === 0) return 1;
+  return Math.max(...todos.map(({ id }) => id)) + 1;
+};
+
+$btnImp.onclick = () => {
+  $btnImp.classList.toggle('check');
+};
 
 
+// button.btnConfirm onclick event
+$btnConfirm.onclick = () => {
+
+  todos = [{ id: getId(), subject: `${$inputSubject.value}`, dDay: `${$inputDate.value}`, content: `${$txtContent.value}`, imp: $btnImp.classList.contains('check') ? true : false, completed: false }, ...todos];
+
+  $inputSubject.value = '';
+  $inputDate.value = '';
+  $btnImp.classList.remove('check');
+  $txtContent.value = '';
+
+  render();
+};
 
 
 // Event Bindings
 window.onload = getTodos;
-
-
