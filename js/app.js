@@ -116,7 +116,7 @@ const getDday = () => {
   return 10;
 };
 
-}
+
 
 const editTodo = id => {
   const myTodo = todos.find(todo => todo.id === +id);
