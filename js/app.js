@@ -63,7 +63,7 @@ const getTodos = () => {
   // localStorage에서 todos 가져온다
   const userData = localStorage.getItem("User");
   todos = JSON.parse(userData);
-  todos = todos ? todos.sort((todo1, todo2) => todo2.id - todo1.id) : [];  
+  todos = todos ? todos.sort((todo1, todo2) => todo2.id - todo1.id) : [];
   render();
 };
 
@@ -100,10 +100,10 @@ const renderHtml = (todos, html) => {
       <span class="subjectView">${todo.subject}</span>
       <button class="btnEdit">수정</button>
       <button class="btnDelete">삭제</button>
-      <div class="contentView">
+      <div class="contentView more">
         ${todo.content}
         <div class="targetDate">
-        완료 예정일 : D-${getDday()} (${todo.dDay})
+        완료 예정일 : D-${getDday(todo.dDay)} (${todo.dDay})
         </div>
       </div>
     </li>
@@ -112,9 +112,6 @@ const renderHtml = (todos, html) => {
   return html;
 };
 
-const getDday = () => {
-  return 10;
-};
 
 
 
@@ -126,8 +123,6 @@ const editTodo = id => {
   $txtContent.value = myTodo.content;
 }
 
-// test
-// test
 // Event Bindings
 window.onload = getTodos;
 
@@ -159,3 +154,45 @@ $completeList.onclick = e => {
   return;
 };
 
+
+
+
+
+// const $btnConfirm = document.querySelector('.btnConfirm');
+// const $inputDate = document.querySelector('.inputDate');
+
+let today = new Date();
+const year = today.getFullYear();
+let month = today.getMonth() + 1;
+let day = today.getDate();
+month = month < 10 ? '0' + month : month;
+day = day < 10 ? '0' + day : day;
+today = year + '-' + month + '-' + day;
+$inputDate.setAttribute('min', today);
+
+
+
+const getDday = (dDay) => {
+  // let [myYear, myMonth, myDay] = $inputDate.value.split('-');
+  // const toDay = new Date();
+  // myYear = +myYear;
+  // myMonth = +myMonth - 1;
+  // myDay = +myDay;
+  // const dDay = new Date(myYear, myMonth, myDay);
+  let today = new Date();
+  const year = today.getFullYear();
+  let month = today.getMonth() + 1;
+  let day = today.getDate();
+  month = month < 10 ? '0' + month : month;
+  day = day < 10 ? '0' + day : day;
+  today = year + '-' + month + '-' + day;
+  // $inputDate.setAttribute('min', today);
+  console.log('dday: ', dDay);
+  console.log('today: ', today);
+  
+  
+  const gap = dDay.getTime() - today.getTime();
+  let result = Math.ceil(gap / (1000 * 60 * 60 * 24));
+  result = result <= 0 ? result * -1 : result;
+  return result;
+}
