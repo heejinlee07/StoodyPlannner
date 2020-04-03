@@ -26,12 +26,12 @@
 
 ## 받아와야 할 데이터
 
-  - 제목 : subject
-  - 목표날짜 : dDay
-  - 중요도 : imp
-  - 내용 : content
-  - id : id
-  - 완료 : completed
+  - 제목 : subject(string)
+  - 목표날짜 : dDay(string - 'yyyy-mm-dd')
+  - 중요도 : imp(boolean)
+  - 내용 : content(string)
+  - id : id(number)
+  - 완료 : completed(boolean)
 
 
 ## 구현되어야 할 기술 및 기본 규약
