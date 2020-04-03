@@ -43,6 +43,17 @@ input[type="date"] {
   padding: 7px 10px;
 }
 
+#editArea input[type="text"], textarea {
+  padding: 9px 10px 7px;
+}
+#editArea input[type="date"] {
+  height: 34px;
+  padding: 4px 10px;
+}
+#editArea textarea {
+  margin-bottom: 8px;
+}
+
 input[type="checkbox"] {
   display: inline-block;
   width: 24px;
@@ -101,7 +112,17 @@ button {
 .btnImportance.check {
   background-color: #9141FF;
 }
-
+#editArea .btnImportance {
+  width: 34px;
+  height: 34px;
+  background-position: 7px 7px;
+}
+#editArea .btnEditConfirm {
+  font-size:16px;
+  background-color: #fff;
+  border: 2px solid #9141FF;
+  color: #9141FF;
+}
 button.btnEdit, button.btnDelete {
   width: 24px;
   height: 24px;
