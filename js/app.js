@@ -2,14 +2,14 @@
 let todos = [];
 
 // Variable Declaration
-const $incompleteList = document.querySelector(".incomplete");
-const $completeList = document.querySelector(".complete");
-const $todoInput = document.querySelector("#todoInputArea");
-const $inputSubject = document.querySelector(".inputSubject");
-const $inputDate = document.querySelector(".inputDate");
-const $btnImp = document.querySelector(".btnImportance");
-const $txtContent = document.querySelector(".textareaContent");
-const $btnConfirm = document.querySelector(".btnConfirm");
+const $incompleteList = document.querySelector('.incomplete');
+const $completeList = document.querySelector('.complete');
+const $todoInput = document.querySelector('#todoInputArea');
+const $inputSubject = document.querySelector('.inputSubject');
+const $inputDate = document.querySelector('.inputDate');
+const $btnImp = document.querySelector('.btnImportance');
+const $txtContent = document.querySelector('.textareaContent');
+const $btnConfirm = document.querySelector('.btnConfirm');
 
 // 초기 데이터(딱 한번만 실행)
 // localStorage.setItem(
@@ -68,14 +68,14 @@ const getTodos = () => {
 };
 
 const updateTodos = () => {
-  localStorage.setItem("User", JSON.stringify(todos));
+  localStorage.setItem('User', JSON.stringify(todos));
 };
 
 const render = () => {
   updateTodos();
 
-  let incompleteHtml = "";
-  let completeHtml = "";
+  let incompleteHtml = '';
+  let completeHtml = '';
   const incompleteTodos = todos.filter(todo => !todo.completed);
   const completeTodos = todos.filter(todo => todo.completed);
 
@@ -91,16 +91,16 @@ const renderHtml = (todos, html) => {
     html += `
     <li id="${todo.id}">
       <span class="iconImportance ${
-        todo.imp ? "check" : ""
+        todo.imp ? 'check' : ''
       }"> 중요도 :  보통
       </span>
       <input type="checkbox" id="ck-${todo.id}" class="inputCheckbox" ${
-      todo.completed ? "checked" : ""}>
+      todo.completed ? 'checked' : ''}>
       <label class="iconCheckbox" for="ck-${todo.id}"></label>
       <span class="subjectView">${todo.subject}</span>
       <button class="btnEdit">수정</button>
       <button class="btnDelete">삭제</button>
-      <div class="contentView more">
+      <div class="contentView">
         ${todo.content}
         <div class="targetDate">
         완료 예정일 : D-${getDday(todo.dDay)} (${todo.dDay})
