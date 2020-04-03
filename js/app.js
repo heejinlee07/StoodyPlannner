@@ -1,15 +1,22 @@
 // State
 let todos = [];
+const getToday = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const date = now.getDate();
+  return year + '-' + (month < 10 ? '0' + month : month) + '-' + (date < 10 ? '0' + date : date);
+};
 
-// Variable Declaration
-const $incompleteList = document.querySelector('.incomplete');
-const $completeList = document.querySelector('.complete');
-const $todoInput = document.querySelector('#todoInputArea');
-const $inputSubject = document.querySelector('.inputSubject');
-const $inputDate = document.querySelector('.inputDate');
-const $btnImp = document.querySelector('.btnImportance');
-const $txtContent = document.querySelector('.textareaContent');
-const $btnConfirm = document.querySelector('.btnConfirm');
+
+const $incompleteList = document.querySelector(".incomplete");
+const $completeList = document.querySelector(".complete");
+const $todoInput = document.querySelector("#todoInputArea");
+const $inputSubject = document.querySelector(".inputSubject");
+const $inputDate = document.querySelector(".inputDate").setAttribute('min', getToday());
+const $btnImp = document.querySelector(".btnImportance");
+const $txtContent = document.querySelector(".textareaContent");
+const $btnConfirm = document.querySelector(".btnConfirm");
 
 
 // 초기 데이터(딱 한번만 실행)
