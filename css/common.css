@@ -26,6 +26,12 @@ ul, ol {
   list-style: none;
 }
 
+button, input[type="checkbox"], label {
+  cursor: pointer;
+}
+input, textarea {
+  cursor: text;
+}
 input[type="text"], input[type="date"], textarea {
   border: 1px solid #cecece;
   color: #707070;

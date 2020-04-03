@@ -27,7 +27,7 @@
 ## 받아와야 할 데이터
 
   - 제목 : subject(string)
-  - 목표날짜 : dDay(string - 'yyyy-mm-dd')
+  - 목표날짜 : dDay(string - 'yyyy-mm-dd')git 
   - 중요도 : imp(boolean)
   - 내용 : content(string)
   - id : id(number)

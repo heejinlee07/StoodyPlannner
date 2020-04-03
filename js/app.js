@@ -63,7 +63,7 @@ const getTodos = () => {
   // localStorage에서 todos 가져온다
   const userData = localStorage.getItem("User");
   todos = JSON.parse(userData);
-  todos = todos ? todos.sort((todo1, todo2) => todo2.id - todo1.id) : [];  
+  todos = todos ? todos.sort((todo1, todo2) => todo2.id - todo1.id) : [];
   render();
 };
 
@@ -92,10 +92,10 @@ const renderHtml = (todos, html) => {
     <li id="${todo.id}">
       <span class="iconImportance ${
         todo.imp ? "check" : ""
-      } ">중요도 :  보통</span>
+      }"> 중요도 :  보통
+      </span>
       <input type="checkbox" id="ck-${todo.id}" class="inputCheckbox" ${
-      todo.completed ? "checked" : ""
-    }>
+      todo.completed ? "checked" : ""}>
       <label class="iconCheckbox" for="ck-${todo.id}"></label>
       <span class="subjectView">${todo.subject}</span>
       <button class="btnEdit">수정</button>
@@ -116,7 +116,14 @@ const getDday = () => {
   return 10;
 };
 
+const getId = () => {
+  if (todos.length === 0) return 1;
+  return Math.max(...todos.map(({ id }) => id)) + 1;
+};
 
+$btnImp.onclick = () => {
+  $btnImp.classList.toggle('check');
+};
 
 const editTodo = id => {
   const myTodo = todos.find(todo => todo.id === +id);
@@ -126,10 +133,22 @@ const editTodo = id => {
   $txtContent.value = myTodo.content;
 }
 
-// test
-// test
+
 // Event Bindings
 window.onload = getTodos;
+
+// button.btnConfirm onclick event
+$btnConfirm.onclick = () => {
+
+  todos = [{ id: getId(), subject: `${$inputSubject.value}`, dDay: `${$inputDate.value}`, content: `${$txtContent.value}`, imp: $btnImp.classList.contains('check') ? true : false, completed: false }, ...todos];
+
+  $inputSubject.value = '';
+  $inputDate.value = '';
+  $btnImp.classList.remove('check');
+  $txtContent.value = '';
+
+  render();
+};
 
 function removeTodo(id) {
   todos = todos.filter(todo => todo.id !== +id);
@@ -159,3 +178,5 @@ $completeList.onclick = e => {
   return;
 };
 
+// Event Bindings
+window.onload = getTodos;
