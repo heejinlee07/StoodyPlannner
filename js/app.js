@@ -2,25 +2,61 @@
 let todos = [];
 
 // Variable Declaration
-const $incompleteList = document.querySelector('.incomplete');
-const $completeList = document.querySelector('.complete');
-const $todoInput = document.querySelector('#todoInputArea');
-const $inputSubject = document.querySelector('.inputSubject');
-const $inputDate = document.querySelector('.inputDate');
-const $btnImp = document.querySelector('.btnImportance');
-const $txtContent = document.querySelector('.textareaContent');
-const $btnConfirm = document.querySelector('.btnConfirm');
+const $incompleteList = document.querySelector(".incomplete");
+const $completeList = document.querySelector(".complete");
+const $todoInput = document.querySelector("#todoInputArea");
+const $inputSubject = document.querySelector(".inputSubject");
+const $inputDate = document.querySelector(".inputDate");
+const $btnImp = document.querySelector(".btnImportance");
+const $txtContent = document.querySelector(".textareaContent");
+const $btnConfirm = document.querySelector(".btnConfirm");
 
 // 초기 데이터(딱 한번만 실행)
-// localStorage.setItem('User', JSON.stringify(
-//   [
-//     { id: 1, subject: 'HTML', dDay: '2020-04-30', content: 'this is content', imp: true, completed: true },
-//     { id: 2, subject: 'CSS', dDay: '2020-05-21', content: 'this is content', imp: true, completed: false },
-//     { id: 3, subject: 'Javascript', dDay: '2020-05-30', content: 'this is content', imp: false, completed: true },
-//     { id: 4, subject: 'React', dDay: '2020-06-04', content: 'this is content', imp: false, completed: false },
-//     { id: 5, subject: 'TypeScript', dDay: '2020-06-20', content: 'this is content', imp: true, completed: false }
-//   ]
-// ));
+// localStorage.setItem(
+//   "User",
+//   JSON.stringify([
+//     {
+//       id: 1,
+//       subject: "HTML",
+//       dDay: "2020-04-30",
+//       content: "this is content",
+//       imp: true,
+//       completed: true
+//     },
+//     {
+//       id: 2,
+//       subject: "CSS",
+//       dDay: "2020-05-21",
+//       content: "this is content",
+//       imp: true,
+//       completed: false
+//     },
+//     {
+//       id: 3,
+//       subject: "Javascript",
+//       dDay: "2020-05-30",
+//       content: "this is content",
+//       imp: false,
+//       completed: true
+//     },
+//     {
+//       id: 4,
+//       subject: "React",
+//       dDay: "2020-06-04",
+//       content: "this is content",
+//       imp: false,
+//       completed: false
+//     },
+//     {
+//       id: 5,
+//       subject: "TypeScript",
+//       dDay: "2020-06-20",
+//       content: "this is content",
+//       imp: true,
+//       completed: false
+//     }
+//   ])
+// );
 
 // Function Declaration
 const getTodos = () => {
@@ -32,14 +68,14 @@ const getTodos = () => {
 };
 
 const updateTodos = () => {
-  localStorage.setItem('User', JSON.stringify(todos));
+  localStorage.setItem("User", JSON.stringify(todos));
 };
 
 const render = () => {
   updateTodos();
 
-  let incompleteHtml = '';
-  let completeHtml = '';
+  let incompleteHtml = "";
+  let completeHtml = "";
   const incompleteTodos = todos.filter(todo => !todo.completed);
   const completeTodos = todos.filter(todo => todo.completed);
 
@@ -54,8 +90,12 @@ const renderHtml = (todos, html) => {
   todos.forEach(todo => {
     html += `
     <li id="${todo.id}">
-      <span class="iconImportance ${todo.imp ? 'check' : ''} ">중요도 :  ${todo.imp ? '중요함' : '보통'}</span>
-      <input type="checkbox" id="ck-${todo.id}" class="inputCheckbox" ${todo.completed ? 'checked' : ''}>
+      <span class="iconImportance ${
+        todo.imp ? "check" : ""
+      }"> 중요도 :  보통
+      </span>
+      <input type="checkbox" id="ck-${todo.id}" class="inputCheckbox" ${
+      todo.completed ? "checked" : ""}>
       <label class="iconCheckbox" for="ck-${todo.id}"></label>
       <span class="subjectView">${todo.subject}</span>
       <button class="btnEdit">수정</button>
@@ -72,7 +112,6 @@ const renderHtml = (todos, html) => {
   return html;
 };
 
-
 const getDday = () => {
   return 10;
 };
@@ -86,6 +125,17 @@ $btnImp.onclick = () => {
   $btnImp.classList.toggle('check');
 };
 
+const editTodo = id => {
+  const myTodo = todos.find(todo => todo.id === +id);
+  $inputSubject.value = myTodo.subject;
+  $inputDate.value = myTodo.dDay;
+  $btnImp.classList.toggle('check', myTodo.imp);
+  $txtContent.value = myTodo.content;
+}
+
+
+// Event Bindings
+window.onload = getTodos;
 
 // button.btnConfirm onclick event
 $btnConfirm.onclick = () => {
@@ -100,6 +150,33 @@ $btnConfirm.onclick = () => {
   render();
 };
 
+function removeTodo(id) {
+  todos = todos.filter(todo => todo.id !== +id);
+}
+
+$incompleteList.onclick = e => {
+  if (e.target.matches('.incomplete > li > .btnDelete')) {
+    removeTodo(e.target.parentNode.id);
+    render();
+  }
+  if (e.target.matches('.incomplete > li > .btnEdit')) {
+    editTodo(e.target.parentNode.id);
+    render();
+  }
+  return;
+};
+
+$completeList.onclick = e => {
+  if (e.target.matches(".complete > li > .btnDelete")) {
+    removeTodo(e.target.parentNode.id);
+    render();
+  }
+  if (e.target.matches('.complete > li > .btnEdit')) {
+    editTodo(e.target.parentNode.id);
+    render();
+  }
+  return;
+};
 
 // Event Bindings
 window.onload = getTodos;
