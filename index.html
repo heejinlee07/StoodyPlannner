@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Stoody Planner</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
@@ -38,7 +38,7 @@
           <li><button class="btnSort">최신순</button></li>
           <li><button class="btnSort">남은기간</button></li>
         </ul>
-        <ul class="todoList">
+        <ul class="todoList incomplete">
           <li>
             <span class="iconImportance check">중요도 : 보통</span>
             <input type="checkbox" id="test1" class="inputCheckbox" /><label
@@ -53,16 +53,6 @@
               <div class="targetDate">완료 예정일 : D-2 (2020.04.02)</div>
             </div>
           </li>
-          <li>
-            <span class="iconImportance">중요도 : 보통</span>
-            <input type="checkbox" id="test2" class="inputCheckbox" /><label
-              class="iconCheckbox"
-              for="test2"
-            ></label>
-            <span class="subjectView">제목입니다.</span>
-            <button class="btnEdit">수정</button>
-            <button class="btnDelete">삭제</button>
-          </li>
         </ul>
       </div>
       <!-- Completed List-->
@@ -74,30 +64,20 @@
           <li><button class="btnSort">남은기간</button></li>
         </ul>
         <ul class="todoList complete">
-          <li>
-            <span class="iconImportance check">중요도 : 보통</span>
-            <input
-              type="checkbox"
-              id="test3"
-              class="inputCheckbox"
-              checked
-            /><label class="iconCheckbox" for="test3"></label>
-            <span class="subjectView">제목입니다.</span>
-            <button class="btnEdit">수정</button>
-            <button class="btnDelete">삭제</button>
-          </li>
-          <li>
-            <span class="iconImportance">중요도 : 보통</span>
-            <input
-              type="checkbox"
-              id="test4"
-              class="inputCheckbox"
-              checked
-            /><label class="iconCheckbox" for="test4"></label>
-            <span class="subjectView">제목입니다.</span>
-            <button class="btnEdit">수정</button>
-            <button class="btnDelete">삭제</button>
-          </li>
+          <!-- <li>
+        <span class="iconImportance check">중요도 :  보통</span>
+        <input type="checkbox" id="test3" class="inputCheckbox" checked><label class="iconCheckbox" for="test3"></label>
+        <span class="subjectView">제목입니다.</span>
+        <button class="btnEdit">수정</button>
+        <button class="btnDelete">삭제</button>
+      </li>
+      <li>
+        <span class="iconImportance">중요도 :  보통</span>
+        <input type="checkbox" id="test4" class="inputCheckbox" checked><label class="iconCheckbox" for="test4"></label>
+        <span class="subjectView">제목입니다.</span>
+        <button class="btnEdit">수정</button>
+        <button class="btnDelete">삭제</button>
+      </li> -->
         </ul>
       </div>
     </div>

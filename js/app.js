@@ -1,39 +1,20 @@
+// State
 let todos = [];
 
-const $todoInputArea = document.querySelector("#todoInputArea");
+// Variable Declaration
+const $incompleteList = document.querySelector(".incomplete");
+const $completeList = document.querySelector(".complete");
+const $todoInput = document.querySelector("#todoInputArea");
 const $inputSubject = document.querySelector(".inputSubject");
 const $inputDate = document.querySelector(".inputDate");
-const $textareaContent = document.querySelector(".textareaContent");
-const $btnFull = document.querySelector(".btnFulll btnConfirm");
+const $btnImp = document.querySelector(".btnImportance");
+const $txtContent = document.querySelector(".textareaContent");
+const $btnConfirm = document.querySelector(".btnConfirm");
 
-const render = () => {
-  let html = "";
-  todos.forEach(todo => {
-    return (html += `<li>
-      <span class="iconImportance check" ${todo.imp}? "checked":"">중요도 : 보통</span>
-        <input type="checkbox" id="test1" class="inputCheckbox" ${todo.completed}?"checked":""}/>
-            <label
-            class="iconCheckbox"
-            for="test1"
-          ></label>
-            <span class="${todo.inputSubject}">${todo.inputSubject}</span>
-            <button class="btnEdit">수정</button>
-            <button class="btnDelete">삭제</button>
-            <div class="contentView">
-              내용입니다. 내용입니다.
-              <div class="${todo.inputDate}">완료 예정일 : D-2 (${todo.inputDate})</div>
-            </div>
-          </li>`);
-  });
-  $todos.innerHTML = html;
-};
-
-const generateId = () => {
-  return todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
-};
-
-const getTodos = () => {
-  todos = [
+// 초기 데이터(딱 한번만 실행)
+localStorage.setItem(
+  "User",
+  JSON.stringify([
     {
       id: 1,
       subject: "HTML",
@@ -74,26 +55,82 @@ const getTodos = () => {
       imp: true,
       completed: false
     }
-  ];
+  ])
+);
+
+// Function Declaration
+const getTodos = () => {
+  // localStorage에서 todos 가져온다
+  const userData = localStorage.getItem("User");
+  todos = JSON.parse(userData);
+  todos.sort((todo1, todo2) => todo2.id - todo1.id);
   render();
 };
 
+const updateTodos = () => {
+  localStorage.setItem("User", JSON.stringify(todos));
+};
+
+const render = () => {
+  updateTodos();
+
+  let incompleteHtml = "";
+  let completeHtml = "";
+  const incompleteTodos = todos.filter(todo => !todo.completed);
+  const completeTodos = todos.filter(todo => todo.completed);
+
+  incompleteHtml = renderHtml(incompleteTodos, incompleteHtml);
+  completeHtml = renderHtml(completeTodos, completeHtml);
+
+  $incompleteList.innerHTML = incompleteHtml;
+  $completeList.innerHTML = completeHtml;
+};
+
+const renderHtml = (todos, html) => {
+  todos.forEach(todo => {
+    html += `
+    <li id="${todo.id}">
+      <span class="iconImportance ${
+        todo.imp ? "check" : ""
+      } ">중요도 :  보통</span>
+      <input type="checkbox" id="ck-${todo.id}" class="inputCheckbox" ${
+      todo.completed ? "checked" : ""
+    }>
+      <label class="iconCheckbox" for="ck-${todo.id}"></label>
+      <span class="subjectView">${todo.subject}</span>
+      <button class="btnEdit">수정</button>
+      <button class="btnDelete">삭제</button>
+      <div class="contentView">
+        ${todo.content}
+        <div class="targetDate">
+        완료 예정일 : D-${getDday()} (${todo.dDay})
+        </div>
+      </div>
+    </li>
+    `;
+  });
+  return html;
+};
+
+const getDday = () => {
+  return 10;
+};
+
+// Event Bindings
 window.onload = getTodos;
 
-$todoInputArea.onkeyup = e => {
-  if (e.keyCode !== 13) return;
-  todos = [
-    {
-      id: generateId(),
-      subject: "HTML",
-      dDay: "2020-04-30",
-      content: "this is content",
-      imp: false,
-      completed: false
-    },
-    ...todos
-  ];
-  $todoInputArea.value = "";
-  console.log($todoInputArea);
+function removeTodo(id) {
+  todos = todos.filter(todo => todo.id !== +id);
+}
+
+$incompleteList.onclick = e => {
+  if (!e.target.matches(".incomplete > li > .btnDelete")) return;
+  removeTodo(e.target.parentNode.id);
+  render();
+};
+
+$completeList.onclick = e => {
+  if (!e.target.matches(".complete > li > .btnDelete")) return;
+  removeTodo(e.target.parentNode.id);
   render();
 };
