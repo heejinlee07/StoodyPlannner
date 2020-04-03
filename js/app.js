@@ -1,15 +1,23 @@
 // State
 let todos = [];
+const getToday = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const date = now.getDate();
+  return year + '-' + (month < 10 ? '0' + month : month) + '-' + (date < 10 ? '0' + date : date);
+};
 
-// Variable Declaration
+
 const $incompleteList = document.querySelector(".incomplete");
 const $completeList = document.querySelector(".complete");
 const $todoInput = document.querySelector("#todoInputArea");
 const $inputSubject = document.querySelector(".inputSubject");
-const $inputDate = document.querySelector(".inputDate");
+const $inputDate = document.querySelector(".inputDate").setAttribute('min', getToday());
 const $btnImp = document.querySelector(".btnImportance");
 const $txtContent = document.querySelector(".textareaContent");
 const $btnConfirm = document.querySelector(".btnConfirm");
+
 
 // 초기 데이터(딱 한번만 실행)
 // localStorage.setItem(
@@ -68,14 +76,14 @@ const getTodos = () => {
 };
 
 const updateTodos = () => {
-  localStorage.setItem("User", JSON.stringify(todos));
+  localStorage.setItem('User', JSON.stringify(todos));
 };
 
 const render = () => {
   updateTodos();
 
-  let incompleteHtml = "";
-  let completeHtml = "";
+  let incompleteHtml = '';
+  let completeHtml = '';
   const incompleteTodos = todos.filter(todo => !todo.completed);
   const completeTodos = todos.filter(todo => todo.completed);
 
@@ -90,20 +98,28 @@ const renderHtml = (todos, html) => {
   todos.forEach(todo => {
     html += `
     <li id="${todo.id}">
-      <span class="iconImportance ${todo.imp ? "check" : ""}"> 중요도 :  보통
+      <span class="iconImportance ${
+        todo.imp ? 'check' : ''
+      }"> 중요도 :  보통
       </span>
       <input type="checkbox" id="ck-${todo.id}" class="inputCheckbox" ${
-      todo.completed ? "checked" : ""
-    }>
+      todo.completed ? 'checked' : ''}>
       <label class="iconCheckbox" for="ck-${todo.id}"></label>
       <span class="subjectView">${todo.subject}</span>
       <button class="btnEdit">수정</button>
       <button class="btnDelete">삭제</button>
-      <div class="contentView more">
+      <div class="contentView">
         ${todo.content}
         <div class="targetDate">
         완료 예정일 : D-${getDday(todo.dDay)} (${todo.dDay})
         </div>
+      </div>
+      <div id="editArea">
+        <input type="text" class="inputSubject">
+        <input type="date" class="inputDate">
+        <button class="btnImportance" title="중요도 체크"></button>
+        <textarea name="" id="" rows="3" class="textareaContent"></textarea>
+        <button class="btnFull btnEditConfirm">수정</button>
       </div>
     </li>
     `;
@@ -120,9 +136,6 @@ const getId = () => {
   return Math.max(...todos.map(({ id }) => id)) + 1;
 };
 
-$btnImp.onclick = () => {
-  $btnImp.classList.toggle("check");
-};
 
 const editTodo = id => {
   // const myTodo = todos.find(todo => todo.id === +id);
@@ -132,6 +145,8 @@ const editTodo = id => {
   // $txtContent.value = myTodo.content;
   // removeTodo(id);
 };
+
+
 
 // Event Bindings
 window.onload = getTodos;
@@ -149,12 +164,10 @@ $btnConfirm.onclick = () => {
     },
     ...todos
   ];
-
   $inputSubject.value = "";
   $inputDate.value = "";
   $btnImp.classList.remove("check");
   $txtContent.value = "";
-
   render();
 };
 
@@ -177,6 +190,12 @@ $incompleteList.onclick = e => {
     editTodo(e.target.parentNode.id);
     render();
   }
+  if (e.target.matches('.incomplete > li > .subjectView')) {
+    const contentView = document.querySelectorAll('.contentView');
+    [...contentView].forEach($item => {
+      $item.classList.toggle('active', e.target.parentNode === $item.parentNode);
+    });
+  }
   return;
 };
 
@@ -188,6 +207,12 @@ $completeList.onclick = e => {
   if (e.target.matches(".complete > li > .btnEdit")) {
     editTodo(e.target.parentNode.id);
     render();
+  }
+  if (e.target.matches('.complete > li > .subjectView')) {
+    const contentView = document.querySelectorAll('.contentView');
+    [...contentView].forEach($item => {
+      $item.classList.toggle('active', e.target.parentNode === $item.parentNode);
+    });
   }
   return;
 };
@@ -204,10 +229,13 @@ $completeList.onchange = e => {
   render();
 };
 
-//test
 
-// const $btnConfirm = document.querySelector('.btnConfirm');
-// const $inputDate = document.querySelector('.inputDate');
+$btnImp.onclick = () => {
+  $btnImp.classList.toggle('check');
+};
+
+
+
 
 // let today = new Date();
 // const year = today.getFullYear();
