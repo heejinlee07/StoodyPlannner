@@ -204,6 +204,8 @@ $completeList.onchange = e => {
   render();
 };
 
+//test
+
 // const $btnConfirm = document.querySelector('.btnConfirm');
 // const $inputDate = document.querySelector('.inputDate');
 
