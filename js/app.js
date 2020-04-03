@@ -1,5 +1,6 @@
 // State
 let todos = [];
+let edit = false;
 
 // Variable Declaration
 const $incompleteList = document.querySelector(".incomplete");
@@ -74,6 +75,11 @@ const updateTodos = () => {
 const render = () => {
   updateTodos();
 
+  if (edit) {
+    $inputTodo.id = e.target.id;
+  } else {
+    $inputTodo.id = '';
+  }
   let incompleteHtml = "";
   let completeHtml = "";
   const incompleteTodos = todos.filter(todo => !todo.completed);
@@ -92,10 +98,10 @@ const renderHtml = (todos, html) => {
     <li id="${todo.id}">
       <span class="iconImportance ${
         todo.imp ? "check" : ""
-      } ">중요도 :  보통</span>
+      }"> 중요도 :  보통
+      </span>
       <input type="checkbox" id="ck-${todo.id}" class="inputCheckbox" ${
-      todo.completed ? "checked" : ""
-    }>
+      todo.completed ? "checked" : ""}>
       <label class="iconCheckbox" for="ck-${todo.id}"></label>
       <span class="subjectView">${todo.subject}</span>
       <button class="btnEdit">수정</button>
@@ -113,7 +119,18 @@ const renderHtml = (todos, html) => {
 };
 
 
+const getDday = () => {
+  return 10;
+}
 
+const getId = () => {
+  if (todos.length === 0) return 1;
+  return Math.max(...todos.map(({ id }) => id)) + 1;
+};
+
+$btnImp.onclick = () => {
+  $btnImp.classList.toggle('check');
+};
 
 const editTodo = id => {
   const myTodo = todos.find(todo => todo.id === +id);
@@ -121,10 +138,24 @@ const editTodo = id => {
   $inputDate.value = myTodo.dDay;
   $btnImp.classList.toggle('check', myTodo.imp);
   $txtContent.value = myTodo.content;
+  removeTodo(id);
 }
 
 // Event Bindings
 window.onload = getTodos;
+
+// button.btnConfirm onclick event
+$btnConfirm.onclick = () => {
+
+  todos = [{ id: getId(), subject: `${$inputSubject.value}`, dDay: `${$inputDate.value}`, content: `${$txtContent.value}`, imp: $btnImp.classList.contains('check') ? true : false, completed: false }, ...todos];
+
+  $inputSubject.value = '';
+  $inputDate.value = '';
+  $btnImp.classList.remove('check');
+  $txtContent.value = '';
+
+  render();
+};
 
 function removeTodo(id) {
   todos = todos.filter(todo => todo.id !== +id);
@@ -161,38 +192,38 @@ $completeList.onclick = e => {
 // const $btnConfirm = document.querySelector('.btnConfirm');
 // const $inputDate = document.querySelector('.inputDate');
 
-let today = new Date();
-const year = today.getFullYear();
-let month = today.getMonth() + 1;
-let day = today.getDate();
-month = month < 10 ? '0' + month : month;
-day = day < 10 ? '0' + day : day;
-today = year + '-' + month + '-' + day;
-$inputDate.setAttribute('min', today);
+// let today = new Date();
+// const year = today.getFullYear();
+// let month = today.getMonth() + 1;
+// let day = today.getDate();
+// month = month < 10 ? '0' + month : month;
+// day = day < 10 ? '0' + day : day;
+// today = year + '-' + month + '-' + day;
+// $inputDate.setAttribute('min', today);
 
 
 
-const getDday = (dDay) => {
-  // let [myYear, myMonth, myDay] = $inputDate.value.split('-');
-  // const toDay = new Date();
-  // myYear = +myYear;
-  // myMonth = +myMonth - 1;
-  // myDay = +myDay;
-  // const dDay = new Date(myYear, myMonth, myDay);
-  let today = new Date();
-  const year = today.getFullYear();
-  let month = today.getMonth() + 1;
-  let day = today.getDate();
-  month = month < 10 ? '0' + month : month;
-  day = day < 10 ? '0' + day : day;
-  today = year + '-' + month + '-' + day;
-  // $inputDate.setAttribute('min', today);
-  console.log('dday: ', dDay);
-  console.log('today: ', today);
+// const getDday = (dDay) => {
+//   // let [myYear, myMonth, myDay] = $inputDate.value.split('-');
+//   // const toDay = new Date();
+//   // myYear = +myYear;
+//   // myMonth = +myMonth - 1;
+//   // myDay = +myDay;
+//   // const dDay = new Date(myYear, myMonth, myDay);
+//   let today = new Date();
+//   const year = today.getFullYear();
+//   let month = today.getMonth() + 1;
+//   let day = today.getDate();
+//   month = month < 10 ? '0' + month : month;
+//   day = day < 10 ? '0' + day : day;
+//   today = year + '-' + month + '-' + day;
+//   // $inputDate.setAttribute('min', today);
+//   console.log('dday: ', dDay);
+//   console.log('today: ', today);
   
   
-  const gap = dDay.getTime() - today.getTime();
-  let result = Math.ceil(gap / (1000 * 60 * 60 * 24));
-  result = result <= 0 ? result * -1 : result;
-  return result;
-}
+//   const gap = dDay.getTime() - today.getTime();
+//   let result = Math.ceil(gap / (1000 * 60 * 60 * 24));
+//   result = result <= 0 ? result * -1 : result;
+//   return result;
+// }
