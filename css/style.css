@@ -61,7 +61,7 @@ h2.title {
   padding: 12px 4px 16px;
   display: none;
 }
-.contentView.active {
+.contentView.active, #editArea.active {
   display: block;
 }
 .targetDate {
