@@ -31,7 +31,7 @@
       <li><button class="btnSort active">중요도</button></li>
       <li><button class="btnSort">최신순</button></li>
       <li><button class="btnSort">남은기간</button></li>
-    </ul>
+    </ul>  
     <ul class="todoList incomplete">
       <li>
         <span class="iconImportance check">중요도 :  보통</span>
@@ -39,9 +39,17 @@
         <span class="subjectView">제목입니다.</span>
         <button class="btnEdit">수정</button>
         <button class="btnDelete">삭제</button>
-        <div class="contentView">
+        <div class="contentView active">
           내용입니다. 내용입니다.
           <div class="targetDate">완료 예정일 : D-2 (2020.04.02)</div>
+        </div>
+        <!-- TodoList 작성폼 -->
+        <div id="editArea">
+          <input type="text" class="inputSubject">
+          <input type="date" class="inputDate">
+          <button class="btnImportance" title="중요도 체크"></button>
+          <textarea name="" id="" rows="3" class="textareaContent"></textarea>
+          <button class="btnFull btnEditConfirm">수정</button>
         </div>
       </li>
     </ul>

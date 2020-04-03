@@ -61,8 +61,17 @@ h2.title {
   padding: 12px 4px 16px;
   display: none;
 }
+.contentView.active {
+  display: block;
+}
 .targetDate {
   margin-top: 4px;
   font-size:12px;
   text-align: right;
+}
+
+
+#editArea {
+  display: flex;
+  flex-wrap: wrap;
 }
