@@ -1,6 +1,5 @@
 // State
 let todos = [];
-let edit = false;
 
 // Variable Declaration
 const $incompleteList = document.querySelector(".incomplete");
