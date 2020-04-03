@@ -80,7 +80,7 @@ const getDday = () => {
 
 
 const toggleCompleted = id => {
-  todos = todos.map(todo => (todo.id === +id ? { ...todo, completed: !todo.completed} : todo));
+  todos = todos.map(todo => (todo.id === +id ? { ...todo, completed: !todo.completed } : todo));
 }
 
 
@@ -98,4 +98,27 @@ $completeList.onchange = e => {
   if (!e.target.matches('.complete > li > .inputCheckbox')) return;
   toggleCompleted(e.target.parentNode.id);
   render();
+}
+
+
+$incompleteList.onclick = e => {
+  if (e.target.matches('.incomplete > li > .btnEdit')) {
+    editTodo(e.target.parentNode.id);
+  }
+}
+
+$completeList.onclick = e => {
+  if (e.target.matches('.complete > li > .btnEdit')) {
+    editTodo(e.target.parentNode.id);
+  }
+}
+
+const editTodo = (id) => {
+  const myTodo = todos.find(todo => todo.id === +id);
+  $inputSubject.value = myTodo.subject;
+  $inputDate.value = myTodo.dDay;
+  $btnImp.classList.toggle('check', myTodo.imp);
+  $txtContent.value = myTodo.content;
+  
+  
 }
