@@ -12,58 +12,58 @@ const $txtContent = document.querySelector(".textareaContent");
 const $btnConfirm = document.querySelector(".btnConfirm");
 
 // 초기 데이터(딱 한번만 실행)
-localStorage.setItem(
-  "User",
-  JSON.stringify([
-    {
-      id: 1,
-      subject: "HTML",
-      dDay: "2020-04-30",
-      content: "this is content",
-      imp: true,
-      completed: true
-    },
-    {
-      id: 2,
-      subject: "CSS",
-      dDay: "2020-05-21",
-      content: "this is content",
-      imp: true,
-      completed: false
-    },
-    {
-      id: 3,
-      subject: "Javascript",
-      dDay: "2020-05-30",
-      content: "this is content",
-      imp: false,
-      completed: true
-    },
-    {
-      id: 4,
-      subject: "React",
-      dDay: "2020-06-04",
-      content: "this is content",
-      imp: false,
-      completed: false
-    },
-    {
-      id: 5,
-      subject: "TypeScript",
-      dDay: "2020-06-20",
-      content: "this is content",
-      imp: true,
-      completed: false
-    }
-  ])
-);
+// localStorage.setItem(
+//   "User",
+//   JSON.stringify([
+//     {
+//       id: 1,
+//       subject: "HTML",
+//       dDay: "2020-04-30",
+//       content: "this is content",
+//       imp: true,
+//       completed: true
+//     },
+//     {
+//       id: 2,
+//       subject: "CSS",
+//       dDay: "2020-05-21",
+//       content: "this is content",
+//       imp: true,
+//       completed: false
+//     },
+//     {
+//       id: 3,
+//       subject: "Javascript",
+//       dDay: "2020-05-30",
+//       content: "this is content",
+//       imp: false,
+//       completed: true
+//     },
+//     {
+//       id: 4,
+//       subject: "React",
+//       dDay: "2020-06-04",
+//       content: "this is content",
+//       imp: false,
+//       completed: false
+//     },
+//     {
+//       id: 5,
+//       subject: "TypeScript",
+//       dDay: "2020-06-20",
+//       content: "this is content",
+//       imp: true,
+//       completed: false
+//     }
+//   ])
+// );
 
 // Function Declaration
 const getTodos = () => {
   // localStorage에서 todos 가져온다
   const userData = localStorage.getItem("User");
   todos = JSON.parse(userData);
-  todos.sort((todo1, todo2) => todo2.id - todo1.id);
+  todos = todos ? todos.sort((todo1, todo2) => todo2.id - todo1.id) : [];  
   render();
 };
 
@@ -116,7 +116,7 @@ const getDday = () => {
   return 10;
 };
 
-}
+
 
 const editTodo = id => {
   const myTodo = todos.find(todo => todo.id === +id);
@@ -126,7 +126,8 @@ const editTodo = id => {
   $txtContent.value = myTodo.content;
 }
 
-
+// test
+// test
 // Event Bindings
 window.onload = getTodos;
 
